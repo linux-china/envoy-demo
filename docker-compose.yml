@@ -1,0 +1,42 @@
+version: "3"
+services:
+  envoy:
+    image: envoyproxy/envoy:latest
+    ports:
+    - "9901:9901"
+    - "10000:10000"
+    - "10800:10800"
+    - "3307:3307"
+    - "50051:50051"
+    volumes:
+    - ./envoy/service-envoy.yaml:/etc/envoy/envoy.yaml
+  httpbin:
+    image: kennethreitz/httpbin
+    ports:
+    - "10801:80"
+  grpc-demo:
+    image: linuxchina/grpc-go-demo
+    ports:
+    - "50052:50051"
+  mysql:
+    image: mysql:5.6.37
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: demo
+  prometheus:
+    image: prom/prometheus:v2.3.2
+    command: "--config.file=/tmp/prometheus.yaml --web.listen-address '0.0.0.0:9090'"
+    ports:
+    - "9090:9090"
+    volumes:
+    - ./prometheus/prometheus.yaml:/tmp/prometheus.yaml
+  grafana:
+    image: grafana/grafana:5.2.2
+    ports:
+    - "3000:3000"
+    volumes:
+    - ./grafana/grafana-datasource.yaml:/etc/grafana/provisioning/datasources/grafana-datasource.yaml
+    - ./grafana/grafana-dashboard-provider.yaml:/etc/grafana/provisioning/dashboards/dashboard-provider.yaml
+    - ./grafana/dashboards:/var/lib/grafana/dashboards
