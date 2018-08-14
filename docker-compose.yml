@@ -9,7 +9,7 @@ services:
     - "3307:3307"
     - "50051:50051"
     volumes:
-    - ./envoy/service-envoy.yaml:/etc/envoy/envoy.yaml
+    - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml
   httpbin:
     image: kennethreitz/httpbin
     ports:
