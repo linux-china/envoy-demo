@@ -1,0 +1,13 @@
+### request local httpbin service
+GET http://localhost:10800/ip
+
+### request google service
+GET http://localhost:10000/
+
+### admin stats with prometheus format
+GET http://localhost:9901/stats/prometheus
+
+### Envoy admin config dump
+GET http://localhost:9901/config_dump
+
+###
