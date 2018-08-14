@@ -22,7 +22,7 @@ curl http://localhost:10800/ip
 ```
 
 * grpc testing: please install evans from https://github.com/ktr0731/evans first
-* 
+
 ```
 cd proto
 evans
