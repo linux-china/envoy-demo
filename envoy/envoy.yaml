@@ -99,6 +99,13 @@ static_resources:
     type: strict_dns
     lb_policy: round_robin
     http2_protocol_options: { }
+    health_checks:
+    - timeout: 3s
+      interval: 30s
+      interval_jitter: 1s
+      unhealthy_threshold: 3
+      healthy_threshold: 3
+      grpc_health_check: { service_name: Health }
     hosts:
     - socket_address:
         address: grpc-demo
