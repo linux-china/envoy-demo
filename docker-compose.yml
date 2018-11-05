@@ -1,7 +1,7 @@
 version: "3"
 services:
   envoy:
-    image: envoyproxy/envoy:latest
+    image: envoyproxy/envoy:v1.8.0
     ports:
     - "9901:9901"
     - "10000:10000"
@@ -19,21 +19,21 @@ services:
     ports:
     - "50052:50051"
   mysql:
-    image: mysql:5.6.37
+    image: mysql:5.6.40
     ports:
     - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: demo
   prometheus:
-    image: prom/prometheus:v2.3.2
+    image: prom/prometheus:v2.4.3
     command: "--config.file=/tmp/prometheus.yaml --web.listen-address '0.0.0.0:9090'"
     ports:
     - "9090:9090"
     volumes:
     - ./prometheus/prometheus.yaml:/tmp/prometheus.yaml
   grafana:
-    image: grafana/grafana:5.2.2
+    image: grafana/grafana:5.3.2
     ports:
     - "3000:3000"
     volumes:
